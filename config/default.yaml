@@ -1,0 +1,36 @@
+# Autonomous Discovery Engine — Default Configuration
+
+ocn:
+  environment: development
+  log_level: INFO
+
+harvester:
+  max_concurrent_sources: 16
+  rate_limit_rps: 10
+  sources_config: config/sources.yaml
+
+patterns:
+  min_support: 0.05
+  min_confidence: 0.70
+  algorithms: [apriori, fp-growth, deep-pattern]
+
+hypothesis:
+  max_per_cycle: 50
+  reasoning_mode: abductive
+  min_novelty_score: 0.60
+
+validation:
+  confidence_threshold: 0.75
+  cross_validate: true
+  kgu_endpoint: http://localhost:8080/kgu/v1
+
+scheduler:
+  cycle_interval_minutes: 60
+  priority_domains: [physics, biology, technology]
+  max_parallel_jobs: 8
+
+api:
+  host: 0.0.0.0
+  port: 8083
+  workers: 4
+  auth_required: true
